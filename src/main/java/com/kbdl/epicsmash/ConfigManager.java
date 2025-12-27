@@ -51,4 +51,8 @@ public class ConfigManager {
     public String getComboMessage() {
         return getConfig().getString("messages.combo", "&6&lКОМБО! &e+2 УРОНА");
     }
+
+    public boolean isAggressiveOnly() {
+        return getConfig().getBoolean("settings.only-aggressive", true);
+    }
 }

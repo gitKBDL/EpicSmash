@@ -37,7 +37,12 @@ public class CombatListener implements Listener {
             return;
         Player attacker = (Player) event.getDamager();
 
-        // 1. Check Ragdoll Hit
+        // 1. Check Aggressive Filter
+        if (configManager.isAggressiveOnly() && !(victim instanceof org.bukkit.entity.Monster)) {
+            return;
+        }
+
+        // 2. Check Ragdoll Hit
         if (ragdollManager.isRagdoll(victim)) {
             event.setCancelled(true); // Don't damage ragdoll
             ragdollManager.handleJuggleHit(victim, attacker);
@@ -73,6 +78,11 @@ public class CombatListener implements Listener {
         if (!(event.getEntity() instanceof LivingEntity))
             return;
         LivingEntity victim = (LivingEntity) event.getEntity();
+
+        // 0. Check Aggressive Filter (Fatal)
+        if (configManager.isAggressiveOnly() && !(victim instanceof org.bukkit.entity.Monster)) {
+            return;
+        }
 
         // 1. Ragdoll Immunity (Prevent double damage to ragdolls mostly handled in
         // onHit, but safety check)
