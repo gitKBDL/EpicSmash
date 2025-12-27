@@ -1,0 +1,4 @@
+name: EpicSmash
+version: 1.0
+main: com.kbdl.epicsmash.EpicSmash
+description: Плагин на механики файтинга.
